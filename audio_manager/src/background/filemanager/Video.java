@@ -1,11 +1,7 @@
 package background.filemanager;
 
-import java.util.Comparator;
-import java.util.function.Function;
-import java.util.function.ToIntFunction;
-import java.util.function.ToLongFunction;
 
-public class Video extends Media implements Comparator {
+public class Video extends Media  {
     private String imageQuality;
 
 
@@ -22,11 +18,5 @@ public class Video extends Media implements Comparator {
         return this.imageQuality;
     }
 
-    @Override
-    public int compare(Object o1, Object o2) {
-        Video v1 = (Video)o1;
-        Video v2 = (Video)o2;
 
-        return 0;
-    }
 }

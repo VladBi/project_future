@@ -6,6 +6,7 @@ import background.filemanager.Media;
 import background.filemanager.Video;
 import background.loader.MediaFileOpener;
 
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Ui {
@@ -66,7 +67,7 @@ public class Ui {
                 if (temp.equalsIgnoreCase("audio") || temp.equalsIgnoreCase("video")) {
                     break;
                 } else {
-                    System.out.printf("Wrong input!!");
+                    System.out.println("Wrong input!!");
                 }
             }
 
@@ -94,7 +95,7 @@ public class Ui {
                 library.addMedia(new Video(fileName,fileType,title,duration,size,typeSpecific));
             }
         }
-        public void manageLibrary () {
+        public void manageLibrary () throws FileNotFoundException {
         Choice choice;
         Scanner scanner = new Scanner(System.in);
         Library library = new Library();
@@ -109,7 +110,7 @@ public class Ui {
             choice = menu();
             switch (choice) {
                 case SAVE:
-                    MediaFileOpener.saveLib(Library library);
+                    MediaFileOpener.saveLibrary(Library library);
                 case LOAD:
                     library = MediaFileOpener.loadLib(filePath2);
                 case ADD -> addFile(library);

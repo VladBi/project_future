@@ -7,12 +7,25 @@ import background.filemanager.Video;
 import background.loader.MediaFileOpener;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Ui {
     public Choice menu() {
         Choice returnChoice;
-        System.out.println("1. Add a file to the library /n" + "2. Save library /n" + "3. Load new library /n" +"4. Sort library by name /n" + "5. Sort library by type /n" + "6. Sort library by date /n" + "7. Sort library by id /n" + "8. Show all files /n" + "9. Delete first item in library /n" + "10. Give title of file to be deleted /n" + "11. Delete whole library /n" + "0. Close menu");
+        System.out.println("1. Add a file to the library");
+        System.out.println("2. Save library");
+        System.out.println("3. Load new library");
+        System.out.println("4. Sort library by name" );
+        System.out.println("5. Sort library by type");
+        System.out.println("6. Sort library by date");
+        System.out.println("7. Sort library by id");
+        System.out.println("8. Show all files");
+        System.out.println("9. Delete first item in library");
+        System.out.println("10. Give title of file to be deleted");
+        System.out.println("11. Delete whole library");
+        System.out.println("0. Close menu");
 
         int choice;
         Scanner scanner = new Scanner(System.in);
@@ -54,7 +67,7 @@ public class Ui {
             String fileName;
             String fileType;
             String title;
-            int duration;
+            int duration = 0;
             float size;
             String typeSpecific;
             Scanner scanner = new Scanner(System.in);
@@ -80,7 +93,12 @@ public class Ui {
 
             //needs exception check for non integers...assume client is correct
             System.out.println("Give the duration in seconds ");
-            duration = scanner.nextInt();
+            try {
+                duration = scanner.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("something went wrong");
+            }
+
 
             System.out.println("Give the size");
             size = scanner.nextFloat();
@@ -95,46 +113,55 @@ public class Ui {
                 library.addMedia(new Video(fileName,fileType,title,duration,size,typeSpecific));
             }
         }
-        public void manageLibrary () throws FileNotFoundException {
+        public void manageLibrary () throws IOException {
         Choice choice;
         Scanner scanner = new Scanner(System.in);
         Library library = new Library();
 
             System.out.println("Give path to library or press enter for fresh one");
             String filePath = scanner.next();
-            if(!filePath.equals("") || MediaFileOpener.isLibrary(filePath)) {
-                library = MediaFileOpener.loadLib(filePath);
-            }
+            //if(!filePath.equals("") || MediaFileOpener.isLibrary(filePath)) {
+            //    library = MediaFileOpener.loadLib(filePath);
+            //}
 
         do {
             choice = menu();
             switch (choice) {
                 case SAVE:
-                    MediaFileOpener.saveLibrary(Library library);
+                    MediaFileOpener.saveLibrary(library);
                 case LOAD:
-                    library = MediaFileOpener.loadLib(filePath2);
-                case ADD -> addFile(library);
-                case SORT_BY_NAME -> library.sortName();
+                    System.out.println("Not ready");
+                    //library = MediaFileOpener.loadLib(filePath2);
+                case ADD :
+                    addFile(library);
+                case SORT_BY_NAME :
+                    library.sortName();
                 break;
-                case SORT_BY_TYPE -> library.sortType();
+                case SORT_BY_TYPE :
+                    library.sortType();
                 break;
-                case SORT_BY_DATE -> library.sortDate();
+                case SORT_BY_DATE :
+                    library.sortDate();
                 break;
-                case SORT_BY_ID -> library.sortId();
+                case SORT_BY_ID :
+                    library.sortId();
                 break;
-                case SHOW_ALL -> library.toString();
+                case SHOW_ALL :
+                    System.out.println(library.toString());
                 break;
-                case DELETE_FIRST -> library.removeFirst();
+                case DELETE_FIRST :
+                    library.removeFirst();
                 break;
                 case DELETE_TITLE:
                     System.out.println("Give name of title to delete: /n");
                     library.removeByString(scanner.next());
                     break;
-                case DELETE_ALL -> library.clear();
-                break;
-                case ERROR -> System.out.println("Erroneous input");
+                case DELETE_ALL : library.clear();
                 break;
                 case CLOSE:
+                    break;
+                case ERROR :
+                    System.out.println("Erroneous input");
                     break;
             }
         } while (choice !=Choice.CLOSE);

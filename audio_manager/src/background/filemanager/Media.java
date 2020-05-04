@@ -61,5 +61,5 @@ public class Media {
         this.title = title;
     }
 
-    public String toString(){ return "ID: " + this.getId() +", Name: " + getFileName() +", Type: " +getFileType() + ", Title: " + getTitle() + ", Duration: " + getDuration() + ", Size of File: " + getSize() + " " ;};
+    public String toString(){ return "|ID: " + this.getId() +"| Name: " + getFileName() +"| Type: " +getFileType() + "| Title: " + getTitle() + "| Duration: " + getDuration() + "| Size of File: " + getSize() + "| " ;};
 }

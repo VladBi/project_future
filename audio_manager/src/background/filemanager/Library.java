@@ -47,6 +47,9 @@ public class Library {
     public void clear() {
         this.library.clear();
     }
+    //public Media returnIndex(int i) {
+    //    return library.get(i);
+   // }
 
     public void removeByString(String next) {
         for (Media m : library) {

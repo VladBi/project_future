@@ -3,11 +3,10 @@ package background.loader;
 import background.filemanager.Library;
 import background.filemanager.Media;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.*;
+import java.util.Scanner;
 
-public static class MediaFileOpener {
+public class MediaFileOpener {
 
 
     public static boolean isLibrary(String filePath) throws FileNotFoundException {
@@ -20,16 +19,25 @@ public static class MediaFileOpener {
         }
     }
 
-    public static Library loadLib(String filePath) throws FileNotFoundException {
-        try {
-            FileReader name = new FileReader(filePath);
-        } catch (FileNotFoundException e) {
+   // public static Library loadLib(String filePath) throws FileNotFoundException {
+    //    try {
+     //       FileReader name = new FileReader(filePath);
+    //    } catch (FileNotFoundException e) {
 
-        }
-    }
+     //   }
+    //}
 
-    public static void saveLibrary(Library library) {
-        
+    public static void saveLibrary(Library library) throws IOException {
+        Scanner scanner = new Scanner(System.in);
+        boolean append_to_file = false;
+        System.out.println("Give destination and name to save");
+        String filepath = scanner.next();
+        FileWriter writer = new FileWriter(filepath,append_to_file);
+        PrintWriter printLine = new PrintWriter(writer);
+        printLine.printf("%s" + "%n",library.toString());
+        printLine.close();
+
+
     }
 
 }

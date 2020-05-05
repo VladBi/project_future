@@ -13,5 +13,7 @@ public enum Choice {
     DELETE_TITLE,
     DELETE_ALL,
     CLOSE,
+    SEARCH,
     ERROR;
+
 }

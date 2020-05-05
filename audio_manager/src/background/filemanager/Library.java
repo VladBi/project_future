@@ -59,4 +59,22 @@ public class Library {
             }
         }
     }
+
+    public String search(String stringSearch) {
+        for (Media m : library) {
+            if (m.getFileName() == stringSearch) {
+                return m.toString();
+
+            }
+        }
+        return "Not found!!";
+    }
+
+    public int getSize() {
+        return library.size();
+    }
+
+    public Media getContent(int i) {
+        return this.library.get(i);
+    }
 }

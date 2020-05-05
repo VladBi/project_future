@@ -20,6 +20,16 @@ public class Media {
         this.dateOfArchive = new Date();
         this.id = this.dateOfArchive.hashCode();
     }
+    public Media(int id, String fileName, String fileType, String title, int duration, float size, Date date ) {
+        this.fileName = fileName;
+        this.fileType = fileType;
+        this.title = title;
+        this.duration = duration;
+        this.size = size;
+        this.dateOfArchive = date;
+        this.id = id;
+    }
+
 
     public int getId() {
         return id;

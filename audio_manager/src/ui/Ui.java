@@ -25,6 +25,7 @@ public class Ui {
         System.out.println("9. Delete first item in library");
         System.out.println("10. Give title of file to be deleted");
         System.out.println("11. Delete whole library");
+        System.out.println("12. Search in Library");
         System.out.println("0. Close menu");
 
         int choice;
@@ -54,6 +55,8 @@ public class Ui {
                     return Choice.DELETE_TITLE;
                 case 11:
                     return Choice.DELETE_ALL;
+                case 12 :
+                    return Choice.SEARCH;
                 case 0:
                     return Choice.CLOSE;
                 default:
@@ -127,13 +130,22 @@ public class Ui {
         do {
             choice = menu();
             switch (choice) {
+                case SEARCH:
+                    System.out.println("Give me whar to search for:");
+                    String stringSearch = scanner.next();
+                    System.out.println(library.search(stringSearch));
+                    break;
                 case SAVE:
                     MediaFileOpener.saveLibrary(library);
+                    break;
                 case LOAD:
-                    System.out.println("Not ready");
-                    //library = MediaFileOpener.loadLib(filePath2);
+                    System.out.println("Give File Path");
+                    String filePath2 = scanner.next();
+                    library = MediaFileOpener.loadLib(filePath2);
+                    break;
                 case ADD :
                     addFile(library);
+                    break;
                 case SORT_BY_NAME :
                     library.sortName();
                 break;
